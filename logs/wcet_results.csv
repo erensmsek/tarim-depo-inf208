@@ -1,0 +1,5 @@
+task,wcet_ms,avg_ms,utilization_pct
+Task1_Sensor,10.742,6.338,2.148
+Task2_Actuator,3.035,1.943,0.303
+Task3_Logging,15.114,8.647,0.302
+TOTAL,,,2.754
