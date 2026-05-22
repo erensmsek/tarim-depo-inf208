@@ -13,11 +13,7 @@ try:
     GPIO.setup(PIR, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     print(f"PIR başlatıldı — GPIO{PIR}")
-    print("Sensör kalibre oluyor, bekle...", end="", flush=True)
-    while GPIO.input(PIR) == GPIO.HIGH:
-        print(".", end="", flush=True)
-        time.sleep(1)
-    print(" hazır!\n")
+    print("Hazır!\n")
 
     print("Sensörün önünden geç. Durdurmak için Ctrl+C\n")
 
