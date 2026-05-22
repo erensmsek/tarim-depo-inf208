@@ -7,6 +7,9 @@ import time
 
 PIR = 17
 
+def hareket_algilandi(channel):
+    print(f"  [!] HAREKET ALGILANDI — {time.strftime('%H:%M:%S')}")
+
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
@@ -19,23 +22,12 @@ try:
         print(".", end="", flush=True)
     print(" hazır!\n")
 
+    GPIO.add_event_detect(PIR, GPIO.RISING, callback=hareket_algilandi, bouncetime=500)
+
     print("Sensörün önünden geç. Durdurmak için Ctrl+C\n")
 
-    print(f"{'Deneme':<8} {'Durum':<20} {'Saat'}")
-    print("-" * 44)
-
-    for i in range(30):
-        # Aynı sonuç 3 kez üst üste gelirse gerçek say (gürültü filtresi)
-        okumalar = [GPIO.input(PIR) for _ in range(3) if not time.sleep(0.05)]
-        durum = GPIO.HIGH if okumalar.count(GPIO.HIGH) >= 3 else GPIO.LOW
-
-        if durum == GPIO.HIGH:
-            print(f"{i+1:<8} HAREKET ALGILANDI !!   {time.strftime('%H:%M:%S')}")
-        else:
-            print(f"{i+1:<8} sessiz               {time.strftime('%H:%M:%S')}", end="\r")
-        time.sleep(1)
-
-    print("\nTest tamamlandı.")
+    while True:
+        time.sleep(0.1)
 
 except ImportError:
     print("RPi.GPIO bulunamadı. Kur: pip3 install RPi.GPIO")
