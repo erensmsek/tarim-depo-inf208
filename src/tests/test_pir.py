@@ -10,7 +10,7 @@ PIR = 17
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
-    GPIO.setup(PIR, GPIO.IN)
+    GPIO.setup(PIR, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     print(f"PIR başlatıldı — GPIO{PIR}")
     print("Sensör kalibre oluyor, 30 saniye bekle...", end="", flush=True)
