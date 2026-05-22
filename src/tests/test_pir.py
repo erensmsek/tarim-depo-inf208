@@ -25,7 +25,10 @@ try:
     print("-" * 44)
 
     for i in range(30):
-        durum = GPIO.input(PIR)
+        # Aynı sonuç 3 kez üst üste gelirse gerçek say (gürültü filtresi)
+        okumalar = [GPIO.input(PIR) for _ in range(3) if not time.sleep(0.05)]
+        durum = GPIO.HIGH if okumalar.count(GPIO.HIGH) >= 3 else GPIO.LOW
+
         if durum == GPIO.HIGH:
             print(f"{i+1:<8} HAREKET ALGILANDI !!   {time.strftime('%H:%M:%S')}")
         else:
