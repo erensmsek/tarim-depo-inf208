@@ -22,6 +22,7 @@ try:
         print(".", end="", flush=True)
     print(" hazır!\n")
 
+    GPIO.remove_event_detect(PIR)
     GPIO.add_event_detect(PIR, GPIO.RISING, callback=hareket_algilandi, bouncetime=500)
 
     print("Sensörün önünden geç. Durdurmak için Ctrl+C\n")
